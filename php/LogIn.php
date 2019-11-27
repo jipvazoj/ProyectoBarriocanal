@@ -59,7 +59,9 @@
 						}
 						
 						if($encontrado&&$estado==1){
-							session_start();
+							if(!isset($_SESSION)){
+								session_start();
+							}
 							$_SESSION['email'] = $_POST['email'];
 							echo '<script>alert("Bienvenido, '.$nombre.'."); location.href="Layout.php";</script>';							
 						}else{

@@ -42,10 +42,10 @@
 				}else{
 					die();
 				}
-				header('Location: HandlingAccounts.php');
+				echo '<script language="javascript">window.location.href="HandlingAccounts.php"</script>';
 			}
 	}else{
 		echo "<script>alert('No se ha podido cambiar el estado.');</script>";
-		header('Location: HandlingAccounts.php');
+		echo '<script language="javascript">window.location.href="HandlingAccounts.php"</script>';
 	}
 ?>

@@ -24,10 +24,10 @@
 					die();
 				}
 				mysqli_close($mysql);
-				header('Location: HandlingAccounts.php');
+				echo '<script language="javascript">window.location.href="HandlingAccounts.php"</script>';
 			}
 	}else{
 		echo "<script>alert('No se ha podido borrar el usuario.');</script>";
-		header('Location: HandlingAccounts.php');
+		echo '<script language="javascript">window.location.href="HandlingAccounts.php"</script>';
 	}
-?>
+?
