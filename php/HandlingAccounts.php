@@ -95,26 +95,28 @@
 									</tr>
 							";
 							while($row = mysqli_fetch_assoc($query)) {
-								if($row["imagen"]==''){
-									$rutaimagen = '../images/noimage.png';
-								}else{
-									$rutaimagen = '../images/'.$row["imagen"];
+								if($row["email"]!="admin@ehu.es"){
+									if($row["imagen"]==''){
+										$rutaimagen = '../images/noimage.png';
+									}else{
+										$rutaimagen = '../images/'.$row["imagen"];
+									}
+									if($row['estado']=='1'){
+										$estadousuario = "Activo";
+									}else{
+										$estadousuario = "Bloqueado";
+									}
+									echo" 
+										<tr>
+											<td>".$row["email"]."</td>
+											<td>".$row["password"]."</td>
+											<td style='text-align:center;'> <img src=".$rutaimagen." height='100'/></td>
+											<td>".$estadousuario."</td>
+											<td><form method='POST' action='ChangeState.php' onsubmit='return confirm(&quot;¿Seguro que quieres cambiar el estado?&quot;);'><input type='submit' name='".$row['email']."' value='Cambiar Estado'/></form></td>
+											<td><form method='POST' action='RemoveUser.php' onsubmit='return confirm(&quot;¿Seguro que quieres borrar el usuario?&quot;);'><input type='submit' name='".$row['email']."' value='Borrar Usuario'/></form></td>
+										</tr>
+									";
 								}
-								if($row['estado']=='1'){
-									$estadousuario = "Activo";
-								}else{
-									$estadousuario = "Bloqueado";
-								}
-								echo" 
-									<tr>
-										<td>".$row["email"]."</td>
-										<td>".$row["password"]."</td>
-										<td style='text-align:center;'> <img src=".$rutaimagen." height='100'/></td>
-										<td>".$estadousuario."</td>
-										<td><form method='POST' action='ChangeState.php' onsubmit='return confirm(&quot;¿Seguro que quieres cambiar el estado?&quot;);'><input type='submit' name='".$row['email']."' value='Cambiar Estado'/></form></td>
-										<td><form method='POST' action='RemoveUser.php' onsubmit='return confirm(&quot;¿Seguro que quieres borrar el usuario?&quot;);'><input type='submit' name='".$row['email']."' value='Borrar Usuario'/></form></td>
-									</tr>
-								";
 							}
 							echo"</table></div>";
 						} else {
