@@ -2,7 +2,7 @@ $(document).ready(function(){
 	var activarmail = false;
 	var activarpass = false;
 	
-	$('#email').change(function(){
+	$('#email').keyup(function(){
 		var email = $('#email').val();
 		if(email!=""){
 			$.ajax({		

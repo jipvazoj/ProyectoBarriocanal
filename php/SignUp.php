@@ -14,6 +14,8 @@
 <body>
 	<section class="main" id="s1">
 	<?php
+		require_once('../lib/nusoap.php');
+		require_once('../lib/class.wsdlcache.php');
 		if(!isset($_SESSION)){
 			session_start();
 		}
@@ -78,6 +80,12 @@
 					if (filter_var($typeuser, FILTER_VALIDATE_INT, $valores) == false) {
 						//echo "<p>Fallo en el tipo de usuario.</p>";
 						$errormsg = $errormsg.'Error en el tipo de usuario.\n';
+						$error=true;
+					}
+					$soapclient = new nusoap_client('http://ehusw.es/jav/ServiciosWeb/comprobarmatricula.php?wsdl' ,true);
+					$result = $soapclient->call('comprobar',array('x'=>$email));
+					if($result!='SI'){
+						$errormsg = $errormsg.'El email no es VIP.\n';
 						$error=true;
 					}
 
