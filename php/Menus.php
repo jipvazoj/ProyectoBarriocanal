@@ -73,6 +73,7 @@ if(!isset($_SESSION)){
 				if(!isset($_SESSION['email'])){
 					echo"<span><a href='Layout.php'>Inicio</a></span>";
 					echo"<span><a href='Credits.php'>Créditos</a></span>";
+					echo"<span><a href='ResetPass.php'>Restablecer contraseña</a></span>";
 				}else{
 					$conexion = mysqli_connect($server, $user, $pass, $basededatos);
 					// Check connection
@@ -106,6 +107,7 @@ if(!isset($_SESSION)){
 						}else{
 							echo"<span><a href='Layout.php'>Inicio</a></span>";
 							echo"<span><a href='Credits.php'>Créditos</a></span>";
+							echo"<span><a href='ResetPass.php'>Restablecer contraseña</a></span>";
 						}
 						mysqli_close($conexion);
 						
