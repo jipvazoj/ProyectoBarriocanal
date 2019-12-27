@@ -44,7 +44,6 @@
 			if(isset($_POST['email'])){
 				echo "<div>";
 				function validar($email, $pass1, $pass2, $codigo){
-					echo "HOLA";
 					$error= false;
 					$errormsg='Se han encontrado los siguientes errores:\n';
 					$passlength = strlen($pass1);
@@ -116,6 +115,7 @@
 					<strong>¡Cambio de contraseña realizado con éxito!</strong> Para entrar con la nueva contraseña <a href='../php/LogIn.php' class='alert-link'>pulsa aquí.</a>.
 					</div>
 				  ";
+				  unset($_SESSION['codigo']);
 				}
 			}else{
 				echo '';

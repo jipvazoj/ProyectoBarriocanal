@@ -54,7 +54,7 @@
 							$headers.="Content-type:text/html;charset=UTF-8"."\r\n";
 							$mensaje = "<html><head><title>Restablecer contraseña</title></head>
 										<body><h2>Proceso de restablecimiento de contraseña:</h2>
-											<ul><li>Entrar en el <a href='ResetPassCode.php?email=".$_POST['email']."'>enlace de recuperación</a></li>
+											<ul><li>Entrar en el <a href='https://sw19lab0.000webhostapp.com/Proyecto/php/ResetPassCode.php/ResetPassCode.php?email=".$_POST['email']."'>enlace de recuperación</a></li>
 												<li>Rellenar los campos con la nueva contraseña y el siguiente código: <b>".$codigo."</b></li>
 											</ul>
 										</body></html>
