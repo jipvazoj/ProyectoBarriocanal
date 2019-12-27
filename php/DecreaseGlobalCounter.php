@@ -2,8 +2,15 @@
 	if(!isset($_SESSION)){
 		session_start();
 	}
-	if(isset($_SESSION['email'])){
 
+	//si se esta log twitter
+	if(isset($_SESSION['twitter'])){
+		session_destroy();
+		header('Location: Layout.php');
+
+	//si se esta log nativo
+	}else if(isset($_SESSION['email'])){
+		
 		try{
 			libxml_use_internal_errors(TRUE);
 			$xml = simplexml_load_file('../xml/Counter.xml');
@@ -21,7 +28,7 @@
 			header('Location: Layout.php');
 		}catch(Exception $e){
 			echo "<div style='color:white; background-color:#ff0000'>Error al cerrar sesión, inténtelo otra vez.</div>";
-		}
+		}		
 	}
 ?>
 
