@@ -4,7 +4,9 @@
 	}
 
 	//si se esta log twitter
-	if(isset($_SESSION['twitter'])){
+	if(isset($_SESSION['access_token_twitter'])){
+		unset($_SESSION['oauth_token']);
+		unset($_SESSION['oauth_token_secret']);
 		session_destroy();
 		header('Location: Layout.php');
 
