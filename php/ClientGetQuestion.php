@@ -12,8 +12,17 @@
 		if(!isset($_SESSION)){
 			session_start();
 		}
-		if(!isset($_SESSION['email'])){
+		if(!isset($_SESSION['email'])&&!isset($_SESSION['twitter_access_token'])&&!isset($_SESSION['facebook_access_token'])&&!isset($_SESSION['facebook_access_token'])){
 			echo "<div style='color:white; background-color:#ff0000'>Para acceder a esta página se necesita haber iniciado sesión.</div>";
+		}else if(isset($_SESSION['twitter_access_token'])||isset($_SESSION['facebook_access_token'])||isset($_SESSION['google_access_token'])){
+			echo "	<div>
+								<div style='border-style:solid;border-color:black; font-family: Verdana,Geneva,sans-serif; text-align:center;'> <p style='text-align:center;'>OBTENER PREGUNTA</p>
+									<form name='datos' ID='datos' action='ClientGetQuestion.php' method='POST'>
+										ID: <input type='number' id='id' name='id' size=55><br>
+										<input type='submit' id='ver' name='ver' value='Obtener pregunta'>	
+									</form>
+								</div>
+							</div>";
 		}else{
 			$conexion = mysqli_connect($server, $user, $pass, $basededatos);
 			// Check connection

@@ -1,7 +1,7 @@
 <?php
 	include '../php/DbConfig.php';
 	function validar($email, $enunciado, $correcta, $incorrecta1, $incorrecta2, $incorrecta3, $complejidad, $tema){
-		if(preg_match("/^[a-z]+[0-9]{3}@ikasle\.ehu\.(eus|es)$/",$email)==0 && preg_match("/^[a-z]+\.*[a-z]+@ehu\.(eus|es)$/", $email)==0){
+		if(preg_match("/\S+@\S+\.\S+/",$email)==0){
 			echo '<div style="color:white; background-color:#ff0000">Fallo en el email.</div>';
 			return false;
 		}
