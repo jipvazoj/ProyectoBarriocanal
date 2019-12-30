@@ -29,8 +29,11 @@ require 'googleConfig.php';
 			
 			//obtener url twitter
 			$usertwitter = $manager->signedIn();
-			$urltwitter = $manager->getAuthUrl();
-			
+			try{
+				$urltwitter = $manager->getAuthUrl();
+			}catch(Exception $e){
+				echo"";
+			}
 			//obtener url facebook
 			$helper = $fb->getRedirectLoginHelper();
 			$permissions = array('scope' => 'email');

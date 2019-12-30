@@ -58,53 +58,50 @@
 					
 					if($encontrado){
 						// Create connection
-						$conexion = mysqli_connect($server, $user, $pass, $basededatos);
+						$conexion2 = mysqli_connect($server, $user, $pass, $basededatos);
 						// Check connection
-						if (!$conexion) {
+						if (!$conexion2) {
 							die('<div style="color:white; background-color:#ff0000">Error al conectar con la base de datos </div>');
 						}
 
 						$sql = "SELECT * FROM preguntas";
-						$query = mysqli_query($conexion, $sql);
+						$query = mysqli_query($conexion2, $sql);
 
+						if (mysqli_num_rows($query) > 0) {
+						  echo"<div>
+						  <table>
+							<tr>
+							  <th>Email</th>
+							  <th>Pregunta</th>
+							  <th>Respuesta Correcta</th>
+							</tr>
+						  ";
+							// output data of each row
+							while($row = mysqli_fetch_assoc($query)) {
+							  //r_correcta, r_in1, r_in2, r_in3, complejidad, tema  
+							  echo" 
+							  <tr>
+								<td>".$row["email"]."</td>
+								<td>".$row["enunciado"]."</td>
+								<td>".$row["r_correcta"]."</td>
+							  </tr>
+							  ";
+							}
+						echo"</table></div>";
+						}
+					}else {
+						echo '<div style="color:white; background-color:#ff0000">El usuario no está registrado.</div>';
+					}
+					mysqli_close($conexion2);						
+				}else{
+					die('<div style="color:white; background-color:#ff0000">El usuario no está registrado.</div>');
+				}
+				mysqli_close($conexion);
+			}else{
+				echo "<div style='color:white; background-color:#ff0000'>Para acceder a esta página se necesita haber iniciado sesión.</div>";
+			}
 
-    if (mysqli_num_rows($query) > 0) {
-      echo"<div>
-      <table>
-        <tr>
-          <th>Email</th>
-          <th>Pregunta</th>
-          <th>Respuesta Correcta</th>
-        </tr>
-      ";
-        // output data of each row
-        while($row = mysqli_fetch_assoc($query)) {
-          //r_correcta, r_in1, r_in2, r_in3, complejidad, tema  
-          echo" 
-          <tr>
-            <td>".$row["email"]."</td>
-            <td>".$row["enunciado"]."</td>
-            <td>".$row["r_correcta"]."</td>
-          </tr>
-          ";
-        }
-        echo"</table></div>";
-    }else {
-		echo '<div style="color:white; background-color:#ff0000">El usuario no está registrado.</div>';
-	}
-		mysqli_close($conexion);						
-	}else{
-		die('<div style="color:white; background-color:#ff0000">El usuario no está registrado.</div>');
-	}
-						
-	}else{
-		die('<div style="color:white; background-color:#ff0000">El usuario no está registrado.</div>');					
-	}
-	}else{
-	echo "<div style='color:white; background-color:#ff0000'>Para acceder a esta página se necesita haber iniciado sesión.</div>";
-	}
-
-    mysqli_close($conexion);
+			
     ?>
 	</section>
   <?php include '../html/Footer.html' ?>
