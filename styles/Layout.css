@@ -1,0 +1,35 @@
+#map{
+	height:400px;
+	width:50%;
+	margin:auto;
+}
+.spoilerbutton {
+	margin: auto;
+	background-color: #555555;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	
+}
+.spoiler {
+	overflow:hidden;
+	background: #eee;
+}
+.spoiler > div {
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: margin 0.2s ease;
+	-o-transition: all 0.2s ease;
+	transition: margin 0.2s ease;
+}
+.spoilerbutton[value="Mostrar tabla de quizzers"] + .spoiler > div,
+.spoilerbutton[value="Jugar"] + .spoiler > div{
+	margin-top:-100%;
+}
+.spoilerbutton[value="Ocultar tabla de quizzers"] + .spoiler > div,
+.spoilerbutton[value="Ocultar temas"] + .spoiler > div{
+	padding:5px;
+}

@@ -14,9 +14,11 @@
 		$validacion = validar($_POST['nick']);
 		if($validacion){
 			$mysql = mysqli_connect($server, $user, $pass, $basededatos);
-			
-			$sql="INSERT INTO resultados (nombre,aciertos,fallos) VALUES ('$_POST[nick]','$_POST[aciertos]', '$_POST[fallos]')";
-			if (!mysqli_query($mysql ,$sql)){
+			$nick = strtoupper($_POST['nick']);
+			$porcentaje = $_POST['aciertos'] / ($_POST['aciertos']+$_POST['fallos']);
+			$insertarnick="INSERT INTO resultados (nombre,aciertos,fallos,porcentaje) VALUES ('".$nick."',$_POST[aciertos],$_POST[fallos], ".$porcentaje.")";
+			if (!mysqli_query($mysql ,$insertarnick)){
+				echo $insertarnick;
 				die('<div style="color:white; background-color:#ff0000">Error en el servidor, inténtalo otra vez.</div>');
 			}
 			mysqli_close($mysql);

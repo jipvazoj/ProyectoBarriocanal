@@ -6,12 +6,62 @@
 	<?php include '../html/Head.html'?>
 	<script src="../js/jquery-3.4.1.min.js"></script>
 	<script src="../js/AddResultAjax.js"></script>
+	<link rel="stylesheet" type="text/css" href="../styles/Likes.css" media="screen" />
+	<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+	<style>
+		#titulojuego{
+		font-family: 'Press Start 2P', cursive;
+		background: repeating-linear-gradient(
+			to bottom,
+			#0f0a1e,
+			#0f0a1e 2px,
+			lighten(#0f0a1e, 3%) 2px,
+			lighten(#0f0a1e, 3%) 4px
+		);
+		height: 90px;
+		color: black;
+		width: 100%;
+		margin: auto;
+		font-size: 30px;
+		line-height: 40px;
+		letter-spacing: 5px;
+		text-shadow: -2px 0 0 #fdff2a,
+					-4px 0 0 #df4a42,
+					2px 0 0 #91fcfe,
+					4px 0 0 #4405fc;
+		}
+		#fuente8b{
+			font-family: 'Press Start 2P', cursive;
+		}
+		.boton8b{
+			font-family: 'Press Start 2P', cursive;
+			background-color: black;
+			border: 1px solid lime;
+			color: lime;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 9px;
+		}
+		.boton8b:hover{
+			font-family: 'Press Start 2P', cursive;
+			background-color: lime;
+			border: 1px solid black;
+			color: black;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 9px;
+		}
+	</style>
 </head>
 <body>
   <section style='overflow-y:scroll;' class="main" id="s1">
     <div>
 
-      <h2>Quiz: el juego de las preguntas</h2>
+      <h2 id='titulojuego'>Quiz: el juego de las preguntas</h2>
 	  
 		
 		
@@ -28,7 +78,22 @@
 			if(!isset($_SESSION['aciertos'])){
 				$_SESSION['aciertos']=0;
 			}
+			
+			if(!isset($_SESSION['like'])) { 
+				$_SESSION['like'] = []; 
+			}
+			
+			if(!isset($_SESSION['dislike'])) { 
+				$_SESSION['dislike'] = []; 
+			}
 
+			function liked($id){
+				return in_array($id, $_SESSION['like']);
+			}
+			
+			function disliked($id){
+				return in_array($id, $_SESSION['dislike']);
+			}
 
 			if(isset($_POST['jugar'])){
 				
@@ -104,20 +169,36 @@
 					echo "Se ha elegido una pregunta aleatoria del tema ".$_POST['temas'].".";
 					echo "<p>En un rango de 0 a 3 la pregunta tiene una complejidad de ".$preguntaseleccionada['complejidad']."</p>";
 					echo "<p>La pregunta ha sido aportada por ".$preguntaseleccionada['email']."</p>";
-					echo "<h1>".$preguntaseleccionada['enunciado']."</h1>";
+					echo "<h1 id='fuente8b'>".$preguntaseleccionada['enunciado']."</h1>";
 					echo "<p><img src=".$rutaimagen." height='100'/></p>";
 					echo "<form method='POST' action='Pregunta.php'>";
 					echo "<input type='hidden' id='id' name='id' value='".$preguntaseleccionada['ID']."'>";
 					echo "<input type='hidden' id='temas' name='temas' value='".$_POST['temas']."'>";
-					echo "<input type='radio' name='respuesta' value='".$respuestas[0]."' required> ".$respuestas[0]."<br>
-							<input type='radio' name='respuesta' value='".$respuestas[1]."'> ".$respuestas[1]."<br>
-							<input type='radio' name='respuesta' value='".$respuestas[2]."'> ".$respuestas[2]."<br>
-							<input type='radio' name='respuesta' value='".$respuestas[3]."'> ".$respuestas[3]."<br>";
-							
-					//LIKE DISLIKE		
-							
-					echo "<p><input type='submit' id='jugar' name='jugar' value='Contestar otra pregunta'><input type='submit' id='terminar' name='terminar' value='Terminar'></p>";
+					?> 
+					<input type='radio' name='respuesta' value='<?php echo $respuestas[0];?>' required><?php echo $respuestas[0];?><br>
+					<input type='radio' name='respuesta' value='<?php echo $respuestas[1];?>'><?php echo $respuestas[1];?><br>
+					<input type='radio' name='respuesta' value='<?php echo $respuestas[2];?>'><?php echo $respuestas[2];?><br>
+					<input type='radio' name='respuesta' value='<?php echo $respuestas[3];?>'><?php echo $respuestas[3];?><br>
+					<br>
+					<p><input class='boton8b'  type='submit' id='jugar' name='jugar' value='Contestar a otra pregunta'>
+					<input class='boton8b'  type='submit' id='terminar' name='terminar' value='Terminar y ver resultados'></p></form>
 					
+					
+					<?php
+					//LIKE DISLIKE
+					?>
+					<table style= "border:none;"><tr style= "border:none;"><td style="border:none;text-align:right">
+					<div id="likes-<?php echo $preguntaseleccionada['ID'];?>" class="<?php if(liked($preguntaseleccionada['ID'])){ echo "liked"; } ?>">
+						<button id="like" class="like-button">Like</button>
+						<button id="unlike" class="unlike-button">Like</button>
+					</div></td><td style='border:none;'>
+					<div id="dislikes-<?php echo $preguntaseleccionada['ID'];?>" class="<?php if(disliked($preguntaseleccionada['ID'])){ echo "disliked"; } ?>">
+						<button id="dislike" class="dislike-button">Dislike</button>
+						<button id="undislike" class="undislike-button">Dislike</button>
+					</div></td></tr>
+					</table>
+
+					<?php
 				}else if(mysqli_num_rows($query) == 1){
 					//CASO PARA LA ÚLTIMA PREGUNTA
 					
@@ -149,22 +230,156 @@
 					echo "<p><img src=".$rutaimagen." height='100'/></p>";
 					echo "<form method='POST' action='Pregunta.php'>";
 					echo "<input type='hidden' id='id' name='id' value='".$preguntaseleccionada['ID']."'>";
-					echo "<input type='hidden' id='temas' name='temas' value='".$_POST['temas']."'>";
-					echo "<input type='radio' name='respuesta' value='".$respuestas[0]."' required> ".$respuestas[0]."<br>
-							<input type='radio' name='respuesta' value='".$respuestas[1]."'> ".$respuestas[1]."<br>
-							<input type='radio' name='respuesta' value='".$respuestas[2]."'> ".$respuestas[2]."<br>
-							<input type='radio' name='respuesta' value='".$respuestas[3]."'> ".$respuestas[3]."<br>";
-							
-					//LIKE DISLIKE		
-							
-					echo "<p><input type='submit' id='terminar' name='terminar' value='Terminar'></p>";
+					echo "<input type='hidden' id='temas' name='temas' value='".$_POST['temas']."'>";?>
+					<input type='radio' name='respuesta' value='<?php echo $respuestas[0];?>' required><?php echo $respuestas[0];?><br>
+					<input type='radio' name='respuesta' value='<?php echo $respuestas[1];?>'><?php echo $respuestas[1];?><br>
+					<input type='radio' name='respuesta' value='<?php echo $respuestas[2];?>'><?php echo $respuestas[2];?><br>
+					<input type='radio' name='respuesta' value='<?php echo $respuestas[3];?>'><?php echo $respuestas[3];?><br>
+					<br>	
+					<p><input class='boton8b' type='submit' id='terminar' name='terminar' value='Terminar'></p></form>
+					
+					<?php
+					//LIKE DISLIKE
+					?>
+					<div id="likes-<?php echo $preguntaseleccionada['ID'];?>" class="<?php if(liked($preguntaseleccionada['ID'])){ echo "liked"; } ?>">
+						<button id="like" class="like-button">Like</button>
+						<button id="unlike" class="unlike-button">Like</button>
+					</div>
+					<div id="dislikes-<?php echo $preguntaseleccionada['ID'];?>" class="<?php if(disliked($preguntaseleccionada['ID'])){ echo "disliked"; } ?>">
+						<button style="display:inline-block;" id="dislike" class="dislike-button">Dislike</button>
+						<button style="display:inline-block;" id="undislike" class="undislike-button">Dislike</button>
+					</div>
+
+					<?php
 					
 				}else{
 					echo "No existen preguntas del tema seleccionado.";
 				}
-		
+				
 		
 				echo "</div>";
+				
+				?>
+				<script language="javascript">
+					//LIKE
+					function likeButton() {
+						var parentEl = this.parentElement;
+						var xhr = new XMLHttpRequest();
+						xhr.open('POST', 'like.php', true);
+						// form data is sent appropriately as a POST request
+						xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+						xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+						xhr.onreadystatechange = function () {
+							if(xhr.readyState == 4 && xhr.status == 200) {
+								var result = xhr.responseText;
+								console.log('Result: ' + result);
+								if(result == "true"){
+									parentEl.classList.add('liked');
+									if(document.getElementById('dislike').parentNode.classList.contains('disliked')){
+										document.getElementById('dislike').parentNode.classList.remove('disliked');
+									}
+									document.getElementById('dislike').disabled = true;
+									document.getElementById('undislike').disabled = true;
+								}
+							}
+						};
+						xhr.send("id=" + parentEl.id);
+					}
+
+					var likebuttons = document.getElementsByClassName("like-button");
+					for(i=0; i < likebuttons.length; i++) {
+						likebuttons.item(i).addEventListener("click", likeButton);
+					}
+
+					//UNLIKE
+					function unlikeButton() {
+						var parentEl = this.parentElement;
+						var xhr = new XMLHttpRequest();
+						xhr.open('POST', 'unlike.php', true);
+						// form data is sent appropriately as a POST request
+						xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+						xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+						xhr.onreadystatechange = function () {
+							if(xhr.readyState == 4 && xhr.status == 200) {
+								var result = xhr.responseText;
+								console.log('Result: ' + result);
+								if(result == "true"){
+									parentEl.classList.remove('liked');
+									document.getElementById('dislike').disabled = false;
+									document.getElementById('undislike').disabled = false;
+								}
+							}
+						};
+						xhr.send("id=" + parentEl.id);
+					}
+
+					var unlikebuttons = document.getElementsByClassName("unlike-button");
+					for(i=0; i < unlikebuttons.length; i++) {
+						unlikebuttons.item(i).addEventListener("click", unlikeButton);
+					}
+
+					//DISLIKE
+					function dislikeButton() {
+						var parentEl = this.parentElement;
+						var xhr = new XMLHttpRequest();
+						xhr.open('POST', 'dislike.php', true);
+						// form data is sent appropriately as a POST request
+						xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+						xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+						xhr.onreadystatechange = function () {
+							if(xhr.readyState == 4 && xhr.status == 200) {
+								var result = xhr.responseText;
+								console.log('Result: ' + result);
+								if(result == "true"){
+									parentEl.classList.add('disliked');
+									console.log(document.getElementsByClassName('like-button').parentNode);
+									if(document.getElementById('like').parentNode.classList.contains('liked')){
+										document.getElementById('like').parentNode.classList.remove('liked');
+									}
+									document.getElementById('like').disabled = true;
+									document.getElementById('unlike').disabled = true;
+								}
+							}
+						};
+						xhr.send("id=" + parentEl.id);
+					}
+
+					var dislikebuttons = document.getElementsByClassName("dislike-button");
+					for(i=0; i < dislikebuttons.length; i++) {
+						dislikebuttons.item(i).addEventListener("click", dislikeButton);
+					}
+
+					//UNDISLIKE
+					function undislikeButton() {
+						var parentEl = this.parentElement;
+						var xhr = new XMLHttpRequest();
+						xhr.open('POST', 'undislike.php', true);
+						// form data is sent appropriately as a POST request
+						xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+						xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+						xhr.onreadystatechange = function () {
+							if(xhr.readyState == 4 && xhr.status == 200) {
+								var result = xhr.responseText;
+								console.log('Result: ' + result);
+								if(result == "true"){
+									parentEl.classList.remove('disliked');
+									document.getElementById('like').disabled = false;
+									document.getElementById('unlike').disabled = false;
+								}
+							}
+						};
+						xhr.send("id=" + parentEl.id);
+					}
+
+					var undislikebuttons = document.getElementsByClassName("undislike-button");
+					for(i=0; i < undislikebuttons.length; i++) {
+						undislikebuttons.item(i).addEventListener("click", undislikeButton);
+					}
+
+
+				</script>
+				
+				<?php
 			}else if(isset($_POST['terminar'])){
 				
 				//comprobar última respuesta
@@ -213,6 +428,8 @@
 				unset($_SESSION['aciertos']);
 				unset($_SESSION['fallos']);
 				unset($_SESSION['preguntas']);
+				unset($_SESSION['like']);
+				unset($_SESSION['dislike']);
 			}else{
 				echo "<div style='color:white; background-color:#ff0000'>Para acceder a esta página es necesario haber seleccionado un tema.</div>";
 			}

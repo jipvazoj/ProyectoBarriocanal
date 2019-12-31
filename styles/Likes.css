@@ -1,0 +1,106 @@
+button.like-button, button.unlike-button {
+	background: white;
+	color: white;
+	text-align: center;
+	width: 70px;
+	border: 0.1px solid #0762f4;
+	padding: 5px 0 5px 0;
+	font-size: 14px;
+	color:blue;
+	</span>
+}
+button.like-button{
+	display: inline;
+}
+
+button.like-button:hover:enabled{
+    background: #0762f4;
+	color: white;
+}
+.liked button.like-button{
+	display: none;
+}
+button.unlike-button{
+	display: none;
+}
+
+button.unlike-button:hover:enabled{
+    background: #0762f4;
+	color: white;
+}
+
+.liked button.unlike-button{
+	display: inline;
+}
+
+button.like-button:disable, button.unlike-button:disable{
+	border: 0.1px solid #616161;
+	background: #616161;
+	color: gray;
+}
+
+button.like-button:hover, button.unlike-button:hover {
+	border: 0.1px solid #616161;
+	background: #616161;
+	color: white;
+}
+.liked .unlike-button{
+	background: #0762f4;
+	color: white;
+}
+
+
+button.dislike-button, button.undislike-button {
+	background: white;
+	color: white;
+	text-align: center;
+	width: 70px;
+	border: 0.1px solid #f42307;
+	padding: 5px 0 5px 0;
+	font-size: 14px;
+	color:blue;
+	display:inline-block;
+}
+
+
+button.dislike-button{
+	display: inline;
+}
+
+button.dislike-button:hover:enabled{
+    background: #f42307;
+	color: white;
+}
+
+.disliked button.dislike-button{
+	display: none;
+}
+button.undislike-button{
+	display: none;
+}
+
+button.undislike-button:hover:enabled{
+    background: #f42307;
+	color: white;
+}
+
+.disliked button.undislike-button{
+	display: inline;
+}
+
+button.dislike-button:disable, button.undislike-button:disable{
+	border: #616161;
+	background: #616161;
+	color: white;
+}
+
+button.dislike-button:hover, button.undislike-button:hover {
+	border: #616161;
+	background: #616161;
+	color: white;
+}
+
+.disliked .undislike-button{
+	background: #f42307;
+	color: white;
+}
