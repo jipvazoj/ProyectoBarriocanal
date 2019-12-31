@@ -58,7 +58,7 @@ button.dislike-button, button.undislike-button {
 	border: 0.1px solid #f42307;
 	padding: 5px 0 5px 0;
 	font-size: 14px;
-	color:blue;
+	color:#f42307;
 	display:inline-block;
 }
 
@@ -104,3 +104,5 @@ button.dislike-button:hover, button.undislike-button:hover {
 	background: #f42307;
 	color: white;
 }
+
+

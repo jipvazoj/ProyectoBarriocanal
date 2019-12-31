@@ -55,6 +55,54 @@
 			display: inline-block;
 			font-size: 9px;
 		}
+		
+		.form-radio
+		{
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			display: inline-block;
+			position: relative;
+			background-color: black;
+			color: lime;
+			top: 10px;
+			height: 30px;
+			width: 30px;
+			border: 0;
+			border-radius: 50px;
+			cursor: pointer;     
+			margin-right: 7px;
+			outline: none;
+			border: 2px solid lime;
+		}
+		.form-radio:checked::before
+		{
+			position: absolute;
+			font-weight: bold;
+			left: 11px;
+			top: 7px;
+			content: '\02143';
+			transform: rotate(40deg);
+		}
+		.form-radio:hover
+		{
+			background-color: lime;
+			color: black;
+		}
+		.form-radio:checked
+		{
+			background-color: lime;
+			color: black;
+			border: 1px solid black;
+		}
+		label
+		{
+			font: 'Press Start 2P', cursive;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			cursor: pointer;
+		} 
+		
 	</style>
 </head>
 <body>
@@ -161,24 +209,27 @@
 					
 					
 					//obtener ruta imagen
-					if($row["img"]==''){
-						$rutaimagen = '../images/noimage.png';
-					}else{
-						$rutaimagen = '../images/'.$row["img"];
-					}
+					
 					echo "Se ha elegido una pregunta aleatoria del tema ".$_POST['temas'].".";
 					echo "<p>En un rango de 0 a 3 la pregunta tiene una complejidad de ".$preguntaseleccionada['complejidad']."</p>";
 					echo "<p>La pregunta ha sido aportada por ".$preguntaseleccionada['email']."</p>";
 					echo "<h1 id='fuente8b'>".$preguntaseleccionada['enunciado']."</h1>";
-					echo "<p><img src=".$rutaimagen." height='100'/></p>";
+					if($row["img"]!=''){
+						$rutaimagen = '../images/'.$row["img"];
+						echo "<p><img src=".$rutaimagen." height='100'/></p>";
+					}
 					echo "<form method='POST' action='Pregunta.php'>";
 					echo "<input type='hidden' id='id' name='id' value='".$preguntaseleccionada['ID']."'>";
 					echo "<input type='hidden' id='temas' name='temas' value='".$_POST['temas']."'>";
-					?> 
-					<input type='radio' name='respuesta' value='<?php echo $respuestas[0];?>' required><?php echo $respuestas[0];?><br>
-					<input type='radio' name='respuesta' value='<?php echo $respuestas[1];?>'><?php echo $respuestas[1];?><br>
-					<input type='radio' name='respuesta' value='<?php echo $respuestas[2];?>'><?php echo $respuestas[2];?><br>
-					<input type='radio' name='respuesta' value='<?php echo $respuestas[3];?>'><?php echo $respuestas[3];?><br>
+					?>
+					<input class='form-radio' id='uno' type='radio' name='respuesta' value='<?php echo $respuestas[0];?>' required>
+							<label style='font-weight:bold;' for="uno"><?php echo $respuestas[0];?></label><br>
+					<input class='form-radio' id='dos' type='radio' name='respuesta' value='<?php echo $respuestas[1];?>'>
+							<label style='font-weight:bold;' for="dos"><?php echo $respuestas[1];?></label><br>
+					<input class='form-radio' id='tres' type='radio' name='respuesta' value='<?php echo $respuestas[2];?>'>
+							<label style='font-weight:bold;' for="tres"><?php echo $respuestas[2];?></label><br>
+					<input class='form-radio' id='cuatro' type='radio' name='respuesta' value='<?php echo $respuestas[3];?>'>
+							<label style='font-weight:bold;' for="cuatro"><?php echo $respuestas[3];?></label><br>
 					<br>
 					<p><input class='boton8b'  type='submit' id='jugar' name='jugar' value='Contestar a otra pregunta'>
 					<input class='boton8b'  type='submit' id='terminar' name='terminar' value='Terminar y ver resultados'></p></form>
@@ -231,24 +282,29 @@
 					echo "<form method='POST' action='Pregunta.php'>";
 					echo "<input type='hidden' id='id' name='id' value='".$preguntaseleccionada['ID']."'>";
 					echo "<input type='hidden' id='temas' name='temas' value='".$_POST['temas']."'>";?>
-					<input type='radio' name='respuesta' value='<?php echo $respuestas[0];?>' required><?php echo $respuestas[0];?><br>
-					<input type='radio' name='respuesta' value='<?php echo $respuestas[1];?>'><?php echo $respuestas[1];?><br>
-					<input type='radio' name='respuesta' value='<?php echo $respuestas[2];?>'><?php echo $respuestas[2];?><br>
-					<input type='radio' name='respuesta' value='<?php echo $respuestas[3];?>'><?php echo $respuestas[3];?><br>
-					<br>	
+					<input class='form-radio' id='uno' type='radio' name='respuesta' value='<?php echo $respuestas[0];?>' required>
+							<label style='font-weight:bold;' for="uno"><?php echo $respuestas[0];?></label><br>
+					<input class='form-radio' id='dos' type='radio' name='respuesta' value='<?php echo $respuestas[1];?>'>
+							<label style='font-weight:bold;' for="dos"><?php echo $respuestas[1];?></label><br>
+					<input class='form-radio' id='tres' type='radio' name='respuesta' value='<?php echo $respuestas[2];?>'>
+							<label style='font-weight:bold;' for="tres"><?php echo $respuestas[2];?></label><br>
+					<input class='form-radio' id='cuatro' type='radio' name='respuesta' value='<?php echo $respuestas[3];?>'>
+							<label style='font-weight:bold;' for="cuatro"><?php echo $respuestas[3];?></label><br>
+					<br>
 					<p><input class='boton8b' type='submit' id='terminar' name='terminar' value='Terminar'></p></form>
 					
 					<?php
 					//LIKE DISLIKE
 					?>
+					<table style= "border:none;"><tr style= "border:none;"><td style="border:none;text-align:right">
 					<div id="likes-<?php echo $preguntaseleccionada['ID'];?>" class="<?php if(liked($preguntaseleccionada['ID'])){ echo "liked"; } ?>">
 						<button id="like" class="like-button">Like</button>
 						<button id="unlike" class="unlike-button">Like</button>
-					</div>
+					</div></td><td style='border:none;'>
 					<div id="dislikes-<?php echo $preguntaseleccionada['ID'];?>" class="<?php if(disliked($preguntaseleccionada['ID'])){ echo "disliked"; } ?>">
-						<button style="display:inline-block;" id="dislike" class="dislike-button">Dislike</button>
-						<button style="display:inline-block;" id="undislike" class="undislike-button">Dislike</button>
-					</div>
+						<button id="dislike" class="dislike-button">Dislike</button>
+						<button id="undislike" class="undislike-button">Dislike</button>
+					</div></td></tr></table>
 
 					<?php
 					

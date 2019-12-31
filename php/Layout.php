@@ -98,13 +98,14 @@
 					$i = 0;
 					while($row = mysqli_fetch_assoc($query)) {
 						$i++;
+						$porcentaje = $row["porcentaje"] * 100 . "%";
 						echo" 
 							<tr>
 								<td>".$i."</td>
 								<td>".$row["nombre"]."</td>
 								<td>".$row["aciertos"]."</td>
 								<td>".$row["fallos"]."</td>
-								<td>".$row["porcentaje"]."</td>
+								<td>".$porcentaje."</td>
 							</tr>
 						";
 					}
