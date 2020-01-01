@@ -1,3 +1,7 @@
+function htmlEscape(str){
+    return str.replace(/[&<>'"]/g,x=>'&#'+x.charCodeAt(0)+';')
+}
+
 function mostrarTabla(){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -18,9 +22,9 @@ function mostrarTabla(){
 			tabla += "<tr><td>" +
 			x[i].getAttribute('author') +
 			"</td><td>" +
-			x[i].getElementsByTagName('p')[0].childNodes[0].nodeValue +
+			htmlEscape(x[i].getElementsByTagName('p')[0].childNodes[0].nodeValue) +
 			"</td><td>" +
-			x[i].getElementsByTagName('value')[0].childNodes[0].nodeValue +
+			htmlEscape(x[i].getElementsByTagName('value')[0].childNodes[0].nodeValue) +
 			"</td></tr>";
 		}
 		tabla+="</table>";//append tabla

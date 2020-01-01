@@ -5,14 +5,12 @@
 <head>
   <?php include '../html/Head.html'?>
   	
-  <link rel="stylesheet" type="text/css" href="../styles/Layout.css" media="screen" />
-  <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
   <style>
   
 	table {
 		border-collapse: collapse;
 		width: 100%;
-		font-family: 'Press Start 2P', cursive;
+		font-family: 'Press Start 2P';
 		background: repeating-linear-gradient(
 					to bottom,
 					#0f0a1e,
@@ -65,6 +63,8 @@
 	
   </style>
   
+  <link rel="stylesheet" type="text/css" href="../styles/Layout.css" media="screen" />
+  <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'/>
 </head>
 <body>
   <section style='overflow-y:scroll;' class="main" id="s1">

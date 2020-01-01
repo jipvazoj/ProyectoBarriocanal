@@ -15,7 +15,9 @@ $(document).ready(function(){
 				$("#nick").val('');
 				$("#mensaje").empty();
 				$('#mensaje').append(mensaje);
-
+                if(document.getElementById('mensajecorrecto')){
+                    $('#guardar').attr("disabled", true);
+                }
 			}
 		});
 	});

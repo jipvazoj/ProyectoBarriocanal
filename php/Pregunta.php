@@ -7,7 +7,7 @@
 	<script src="../js/jquery-3.4.1.min.js"></script>
 	<script src="../js/AddResultAjax.js"></script>
 	<link rel="stylesheet" type="text/css" href="../styles/Likes.css" media="screen" />
-	<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
 	<style>
 		#titulojuego{
 		font-family: 'Press Start 2P', cursive;
@@ -154,7 +154,7 @@
 						if (!$conexion) {
 							die('<div style="color:white; background-color:#ff0000">Error al conectar con la base de datos </div>');
 						}
-						$sql = "SELECT * FROM preguntas WHERE tema = ".$_POST['temas']." AND ID = ".$_POST['id'];
+						$sql = "SELECT * FROM preguntas WHERE tema = '".$_POST['temas']."' AND ID = ".$_POST['id'];
 						
 						$query = mysqli_query($conexion, $sql);
 						
@@ -176,17 +176,17 @@
 				echo "<div style='border-style:solid;border-color:black; font-family: Verdana,Geneva,sans-serif;'>";
 				
 				// Create connection
-				$conexion = mysqli_connect($server, $user, $pass, $basededatos);
+				$conexion2 = mysqli_connect($server, $user, $pass, $basededatos);
 				// Check connection
-				if (!$conexion) {
+				if (!$conexion2) {
 					die('<div style="color:white; background-color:#ff0000">Error al conectar con la base de datos </div>');
 				}
 				if(isset($_SESSION['preguntas'])){
-					$sql = "SELECT * FROM preguntas WHERE tema = ".$_POST['temas']." AND ID NOT IN (".$_SESSION['preguntas'].")";
+					$sql = "SELECT * FROM preguntas WHERE tema = '".$_POST['temas']."' AND ID NOT IN (".$_SESSION['preguntas'].")";
 				}else{
-					$sql = "SELECT * FROM preguntas WHERE tema = ".$_POST['temas'];
+					$sql = "SELECT * FROM preguntas WHERE tema = '".$_POST['temas']."'";
 				}
-				$query = mysqli_query($conexion, $sql);
+				$query = mysqli_query($conexion2, $sql);
 				
 				if (mysqli_num_rows($query) > 1) {
 					//CASO GENERAL PARA MÁS DE 1 RESULTADO
@@ -211,11 +211,11 @@
 					//obtener ruta imagen
 					
 					echo "Se ha elegido una pregunta aleatoria del tema ".$_POST['temas'].".";
-					echo "<p>En un rango de 0 a 3 la pregunta tiene una complejidad de ".$preguntaseleccionada['complejidad']."</p>";
+					echo "<p>En un rango de 1 a 3 la pregunta tiene una complejidad de ".$preguntaseleccionada['complejidad']."</p>";
 					echo "<p>La pregunta ha sido aportada por ".$preguntaseleccionada['email']."</p>";
-					echo "<h1 id='fuente8b'>".$preguntaseleccionada['enunciado']."</h1>";
-					if($row["img"]!=''){
-						$rutaimagen = '../images/'.$row["img"];
+					echo "<h1 id='fuente8b'>".htmlspecialchars($preguntaseleccionada['enunciado'])."</h1>";
+					if($preguntaseleccionada['img']!=''){
+						$rutaimagen = '../images/'.$preguntaseleccionada['img'];
 						echo "<p><img src=".$rutaimagen." height='100'/></p>";
 					}
 					echo "<form method='POST' action='Pregunta.php'>";
@@ -267,18 +267,14 @@
 					$respuestas[] = $preguntaseleccionada['r_in3'];
 					shuffle($respuestas);
 					
-					
-					//obtener ruta imagen
-					if($row["img"]==''){
-						$rutaimagen = '../images/noimage.png';
-					}else{
-						$rutaimagen = '../images/'.$row["img"];
-					}
 					echo "Se ha elegido una pregunta aleatoria del tema ".$_POST['temas'].".";
-					echo "<p>En un rango de 0 a 3 la pregunta tiene una complejidad de ".$preguntaseleccionada['complejidad']."</p>";
+					echo "<p>En un rango de 1 a 3 la pregunta tiene una complejidad de ".$preguntaseleccionada['complejidad']."</p>";
 					echo "<p>La pregunta ha sido aportada por ".$preguntaseleccionada['email']."</p>";
 					echo "<h1>".$preguntaseleccionada['enunciado']."</h1>";
-					echo "<p><img src=".$rutaimagen." height='100'/></p>";
+					if($preguntaseleccionada['img']!=''){
+						$rutaimagen = '../images/'.$preguntaseleccionada['img'];
+						echo "<p><img src=".$rutaimagen." height='100'/></p>";
+					}
 					echo "<form method='POST' action='Pregunta.php'>";
 					echo "<input type='hidden' id='id' name='id' value='".$preguntaseleccionada['ID']."'>";
 					echo "<input type='hidden' id='temas' name='temas' value='".$_POST['temas']."'>";?>
@@ -447,7 +443,7 @@
 						if (!$conexion) {
 							die('<div style="color:white; background-color:#ff0000">Error al conectar con la base de datos </div>');
 						}
-						$sql = "SELECT * FROM preguntas WHERE tema = ".$_POST['temas']." AND ID = ".$_POST['id'];
+						$sql = "SELECT * FROM preguntas WHERE tema = '".$_POST['temas']."' AND ID = ".$_POST['id'];
 						
 						$query = mysqli_query($conexion, $sql);
 						

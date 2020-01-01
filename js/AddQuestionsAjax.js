@@ -1,3 +1,7 @@
+function htmlEscape(str){
+    return str.replace(/[&<>'"]/g,x=>'&#'+x.charCodeAt(0)+';')
+}
+
 function mostrarTabla2(){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -17,9 +21,9 @@ function mostrarTabla2(){
 			tabla += "<tr><td>" +
 			x[i].getAttribute('author') +
 			"</td><td>" +
-			x[i].getElementsByTagName('p')[0].childNodes[0].nodeValue +
+			htmlEscape(x[i].getElementsByTagName('p')[0].childNodes[0].nodeValue) +
 			"</td><td>" +
-			x[i].getElementsByTagName('value')[0].childNodes[0].nodeValue +
+			htmlEscape(x[i].getElementsByTagName('value')[0].childNodes[0].nodeValue) +
 			"</td></tr>";
 		}
 		tabla+="</table>";//append tabla
@@ -56,6 +60,7 @@ $(document).ready(function(){
 				$("#complejidad").val(['1']);
 				$("#file").val('');
 				$("#imagen").attr("src", '');
+				$("imagen").hide();
 				$('#vermensajes').empty();	
 				$('#vertabla').empty();
 				$('#vermensajes').append(mensaje);
@@ -83,6 +88,7 @@ $(document).ready(function(){
 		$("#complejidad").val(['1']);
 		$("#file").val('');
 		$("#imagen").attr("src", '');
+		$("imagen").hide();
 		$('#vermensajes').empty();
 		$('#vertabla').empty();
 	});

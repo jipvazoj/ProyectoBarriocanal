@@ -48,7 +48,7 @@ require 'googleConfig.php';
 				$_SESSION['email']=$usertwitter->email;
 				include '../php/IncreaseGlobalCounter.php';
 				echo "<span class='right' id='logout'><a onclick='logout();' style='text-decoration: underline; cursor: pointer; color:blue;'>Logout</a> </span>";
-				echo "<span class='right'>Bienvenido, ".$usertwitter->name."<img src=".$usertwitter->profile_image_url_https." height='100'/></span>";
+				echo "<span class='right'>Bienvenido, ".$usertwitter->name."<img src=".$usertwitter->profile_image_url_https." height='70'/></span>";
 				
 			//si se esta log en facebook
 			}else if(isset($_SESSION['facebook_access_token'])){
@@ -69,7 +69,7 @@ require 'googleConfig.php';
 				$_SESSION['email']=$userFacebook->getEmail();
 				include '../php/IncreaseGlobalCounter.php';
 				echo "<span class='right' id='logout'><a onclick='logout();' style='text-decoration: underline; cursor: pointer; color:blue;'>Logout</a> </span>";
-				echo "<span class='right'>Bienvenido, ".$userFacebook->getName()."<img src=".$userFacebook->getPicture()->getUrl()." height='100'/></span>";
+				echo "<span class='right'>Bienvenido, ".$userFacebook->getName()."<img src=".$userFacebook->getPicture()->getUrl()." height='70'/></span>";
 			//si esta log en google
 			}else if(isset($code)||isset($_SESSION['google_access_token'])) {
 			    if(isset($code)){
@@ -96,7 +96,7 @@ require 'googleConfig.php';
 				
 					include '../php/IncreaseGlobalCounter.php';
 					echo "<span class='right' id='logout'><a onclick='logout();' style='text-decoration: underline; cursor: pointer; color:blue;'>Logout</a> </span>";
-					echo "<span class='right'>Bienvenido, ".$_SESSION['google_name']."<img src=".$_SESSION['google_picture']." height='100'/></span>";
+					echo "<span class='right'>Bienvenido, ".$_SESSION['google_name']."<img src=".$_SESSION['google_picture']." height='70'/></span>";
 			
 			//si se está logueado de forma nativa	
 			}else if(isset($_SESSION['email'])){
@@ -132,7 +132,7 @@ require 'googleConfig.php';
 				if($encontrado){
 					include '../php/IncreaseGlobalCounter.php';
 					echo "<span class='right' id='logout'><a onclick='logout();' style='text-decoration: underline; cursor: pointer; color:blue;'>Logout</a> </span>";
-					echo"<span class='right'>Bienvenido, ".$nombre."<img src=".$rutaimagen." height='100'/></span>";
+					echo"<span class='right'>Bienvenido, ".$nombre."<img src=".$rutaimagen." height='70'/></span>";
 				}else{
 					echo "<span class='right'><a href='/Proyecto/php/SignUp.php'>Registro</a></span> ";
 					echo "<span class='right'><a href='/Proyecto/php/LogIn.php'>Login</a></span>";

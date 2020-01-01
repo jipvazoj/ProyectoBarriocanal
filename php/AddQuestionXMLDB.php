@@ -29,12 +29,18 @@
 			if(isset($_FILES['foto'])) {
 				$imagen = $_FILES['foto']['name'];
 				$imagenTMP = $_FILES['foto']['tmp_name'];
-				$carpeta = "A:/xampp/htdocs/Proyecto/images/";
+				$carpeta = "/storage/ssd5/138/10866138/public_html/Proyecto/images/";
 				move_uploaded_file($imagenTMP, $carpeta.$imagen);
 			}
-			$sql="INSERT INTO preguntas (ID, email, enunciado, r_correcta, r_in1, r_in2, r_in3, complejidad, tema, img) VALUES
-			(NULL, '$_POST[email]','$_POST[enunciado]', '$_POST[correcta]', '$_POST[incorrecta1]', '$_POST[incorrecta2]', '$_POST[incorrecta3]',
-			'$_POST[complejidad]', '$_POST[tema]', '$imagen')";
+			$enunciado = htmlspecialchars($_POST['enunciado']);
+			$correcta = htmlspecialchars($_POST['correcta']);
+			$incorrecta1 = htmlspecialchars($_POST['incorrecta1']);
+			$incorrecta2 = htmlspecialchars($_POST['incorrecta2']);
+			$incorrecta3 = htmlspecialchars($_POST['incorrecta3']);
+			$tema = htmlspecialchars($_POST['tema']);
+			$sql="INSERT INTO preguntas (ID, email, enunciado, r_correcta, r_in1, r_in2, r_in3, complejidad, tema, img,likes,dislikes) VALUES
+			(NULL, '$_POST[email]','$enunciado', '$correcta', '$incorrecta1', '$incorrecta2', '$incorrecta3',
+			'$_POST[complejidad]', '$tema', '$imagen',0,0)";
 			if (!mysqli_query($mysql ,$sql)){
 				die('<div style="color:white; background-color:#ff0000">Error en el servidor, inténtalo otra vez.</div>');
 			}
