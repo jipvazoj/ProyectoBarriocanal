@@ -80,7 +80,7 @@
 					die('<div style="color:white; background-color:#ff0000">Error al conectar con la base de datos </div>');
 				}
 
-				$sql = "SELECT * FROM resultados ORDER BY porcentaje DESC,aciertos DESC LIMIT 10";
+				$sql = "SELECT * FROM resultados ORDER BY aciertos DESC, porcentaje DESC LIMIT 10";
 				$query = mysqli_query($conexion, $sql);
 
 				if (mysqli_num_rows($query) > 0) {
@@ -113,6 +113,7 @@
 				}else{
 					echo "Todavía nadie ha participado. ¡Sé el primero!";
 				}
+				if(!isset($_SESSION['email'])){
 			?>
 			</div></div><br>
 									
@@ -149,6 +150,7 @@
 				echo "No hay preguntas. ¡Añade nuevas!";
 			}
 			echo "</div><div></div>";
+			}
 		?>
       
     </div>

@@ -470,6 +470,7 @@
 				echo "Fallos: ".$_SESSION['fallos']."<br></h1>";
 				
 				//formulario para introducir datos en la BBDD AJAX
+				echo "Guarda opcionalmente tus resultados";
 				echo "<form id='fresul' name='fresul' method='POST'>";
 				echo "Nick de 3 letras: <input type='text' maxlength='3' pattern='[a-zA-Z]{3}' id='nick' name='nick' placeholder='XYZ' required>";
 				echo "<input type='hidden' id='aciertos' name='aciertos' value='".$_SESSION['aciertos']."'>";

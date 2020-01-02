@@ -5,7 +5,8 @@
   <?php include '../html/Head.html'?>
   <?php 
 	define("API_OWM","2c166a145ac561fb98d039878d560c06");
-	$datoscliente = json_decode(file_get_contents('http://www.geoplugin.net/json.gp?ip=77.230.150.38'),true);
+	$ipcliente=$_SERVER['REMOTE_ADDR'];
+	$datoscliente = json_decode(file_get_contents('http://www.geoplugin.net/json.gp?ip='.$ipcliente),true);
     $realIP = file_get_contents("http://ipecho.net/plain");
 	$datosservidor = json_decode(file_get_contents('http://ipinfo.io/'.$realIP.'/geo'),true);
 	$loc = explode(",", $datosservidor['loc']);
@@ -14,9 +15,9 @@
 ?>
 	<script src="../js/jquery-3.4.1.min.js"></script>
 	<script src="../js/ShowMap.js"></script>
-	<link rel="stylesheet" type="text/css" href="../styles/Credits.css" media="screen" />
-	<link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css">
 	<script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+	<link rel="stylesheet" type="text/css" href="../styles/Credits.css" media="screen" />
+	<link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
 	
 </head>
 <body onload="mapa(<?php echo $datoscliente['geoplugin_longitude'];?>, <?php echo $datoscliente['geoplugin_latitude'];?> );">
@@ -32,21 +33,26 @@
 		</div></div>
 		<br>		
 		<input class="spoilerbutton" type="button" value="Mostrar tu ubicación" onclick="this.value=this.value=='Mostrar tu ubicación'?'Ocultar tu ubicación':'Mostrar tu ubicación';">
-		<div class="spoiler"><div></div>
+		<div class="spoiler"><div>
 		<?php
 			echo "<h2>Tu dirección IP se encuentra ubicada en:<br>";
 			echo $datoscliente['geoplugin_city'].", ".$datoscliente['geoplugin_region'].", ".$datoscliente['geoplugin_countryName']."<br>";
 			echo "Latitud: ".$datoscliente['geoplugin_latitude']." <br> Longitud: ".$datoscliente['geoplugin_longitude']."</h2>";
 			echo "<br>";
 		?>
-		<div id="map" class="map"></div>
+		<div id="map" class="map">
+		    <div id="popup" class="ol-popup">
+                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                <div id="popup-content"><b>Cliente</b><br>Esta es tu ubicación.</div>
+            </div>
+        </div>
 	    <?php
 			echo "<h2>La dirección IP del servidor se encuentra ubicada en:<br>";
 			echo $datosservidor['city'].", ".$datosservidor['region'].", ".$datosservidor['country']."<br>";
 			echo "Latitud: ".$latitudserver." <br> Longitud: ".$longitudserver."</h2>";
 			echo "<br>";
 		?>
-		</div>
+		</div></div>
 		<br>
 		<input class="spoilerbutton" type="button" value="Mostrar previsión del tiempo en tu ubicación" onclick="this.value=this.value=='Mostrar previsión del tiempo en tu ubicación'?'Ocultar previsión del tiempo en tu ubicación':'Mostrar previsión del tiempo en tu ubicación';">
 		<div class="spoiler"><div>

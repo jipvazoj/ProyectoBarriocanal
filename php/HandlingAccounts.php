@@ -120,15 +120,15 @@
 							}
 							echo"</table></div>";
 						} else {
-							echo '<div style="color:white; background-color:#ff0000">El usuario no está registrado.</div>';
+							echo '<div style="color:white; background-color:#ff0000">El usuario no está registrado o no tiene los privilegios necesarios para acceder.</div>';
 						}
 						mysqli_close($conexion);						
 					}else{
-						die('<div style="color:white; background-color:#ff0000">El usuario no está registrado.</div>');
+						die('<div style="color:white; background-color:#ff0000">El usuario no está registrado o no tiene los privilegios necesarios para acceder.</div>');
 					}
 						
 				}else{
-					die('<div style="color:white; background-color:#ff0000">El usuario no está registrado.</div>');					
+					die('<div style="color:white; background-color:#ff0000">El usuario no está registrado o no tiene los privilegios necesarios para acceder.</div>');					
 				}
 		}else{
 			echo "<div style='color:white; background-color:#ff0000'>Para acceder a esta página se necesita haber iniciado sesión.</div>";
