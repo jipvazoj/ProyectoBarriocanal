@@ -4,7 +4,7 @@
 <html>
 <head>
   <?php include '../html/Head.html'?>
-  	
+  	<link rel="icon" type="image/png" href="../images/icon/favicon-32x32.png" sizes="32x32" />
   <style>
   
 	table {

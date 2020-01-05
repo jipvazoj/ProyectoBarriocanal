@@ -3,6 +3,7 @@
 <html>
 <head>
 	<?php include '../html/Head.html'?>
+	<link rel="icon" type="image/png" href="../images/icon/favicon-32x32.png" sizes="32x32" />
 	<script src="../js/jquery-3.4.1.min.js"></script>
 	<script src="../js/AddQuestionsAjax.js"></script>
 	<script src="../js/ShowQuestionsAjax.js"></script>

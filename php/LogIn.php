@@ -6,7 +6,7 @@
 	<?php include '../php/DbConfig.php' ?>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="../js/ValidateLogIn.js"></script>
-    
+    <link rel="icon" type="image/png" href="../images/icon/favicon-32x32.png" sizes="32x32" />
 </head>
 <body>
   <section class="main" id="s1">

@@ -4,6 +4,7 @@
 <head>
 	<?php include '../html/Head.html'?>
 	<?php include '../php/DbConfig.php' ?>
+	<link rel="icon" type="image/png" href="../images/icon/favicon-32x32.png" sizes="32x32" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <style>
 		table {

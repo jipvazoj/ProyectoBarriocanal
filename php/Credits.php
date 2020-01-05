@@ -13,6 +13,7 @@
 	$latitudserver = $loc[0];
 	$longitudserver=$loc[1];
 ?>
+<link rel="icon" type="image/png" href="../images/icon/favicon-32x32.png" sizes="32x32" />
 	<script src="../js/jquery-3.4.1.min.js"></script>
 	<script src="../js/ShowMap.js"></script>
 	<script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>

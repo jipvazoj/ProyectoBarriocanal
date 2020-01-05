@@ -8,6 +8,7 @@
 	<script src="../js/AddResultAjax.js"></script>
 	<link rel="stylesheet" type="text/css" href="../styles/Likes.css" media="screen" />
 	<link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+	<link rel="icon" type="image/png" href="../images/icon/favicon-32x32.png" sizes="32x32" />
 	<style>
 		#titulojuego{
 		font-family: 'Press Start 2P', cursive;

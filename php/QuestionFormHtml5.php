@@ -5,6 +5,7 @@
   <?php include '../html/Head.html'?>
   <script src="../js/jquery-3.4.1.min.js"></script>
   <script src="../js/ShowImageInForm.js"></script>
+  <link rel="icon" type="image/png" href="../images/icon/favicon-32x32.png" sizes="32x32" />
 </head>
 <body>
   <section class="main" id="s1">
