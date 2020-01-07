@@ -70,6 +70,12 @@
 						$errormsg = $errormsg.'El código es incorrecto.';
 						$error=true;
 					}
+					$soapclient = new nusoap_client('http://localhost/Proyecto/php/VerifyPassWS.php?wsdl' ,true);
+					$result = $soapclient->call('comprobarpass',array('x'=>$_POST['pass1'], 'y'=>'1010'));
+					if($result!='VALIDA'){
+						$errormsg = $errormsg.'El email no es VIP.\n';
+						$error=true;
+					}
 					if($error){
 						echo'<script type="text/javascript">alert("'.$errormsg.'");</script>';
 						return false;
